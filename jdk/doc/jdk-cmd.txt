@@ -1,0 +1,29 @@
+
+
+1) jar
+源码归档
+jar cvf new-sources.jar 目录(类的第一层目录)
+例如: jar cvf C:\javax.servlet-8-sources.jar javax
+jar cvf javax.servlet-7-sources.jar javax
+
+jar cvf commons-pool2-2.2-sources.jar org
+
+jar cvf shiro-all-1.2.3-sources.jar org
+
+
+jar cvf bccs-api-3.0.1-sources.jar com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

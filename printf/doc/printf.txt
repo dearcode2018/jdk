@@ -1,0 +1,31 @@
+printf
+System.out.printf(String, Object[])
+
+控制符号前缀: &
+
+%% --> %
+%(length)d : 输出10进制整数 (byte/short/int/long/BigInteger) 十进制: decimalism
+%(m.n)f : 输出10机制浮点数 (float/double/BigDecimal) m表示总长度可以省略，
+直接 %.3f，若实际长度不够，会直接在前方补空格
+%e或%E : 输出科学计数法输出浮点数 (float/double/BigDecimal)
+%o : 输出8进制整数 (byte/short/int/long/BigInteger)
+%x或%X : 输出8进制整数 (byte/short/int/long/BigInteger)
+%(length)s或%(length)S : 输出字符串
+%c或%C : 输出字符 (byte/short/int/char)
+%b : 输出布尔值(true/false) null值则为false
+%B : 输出布尔值(TRUE/FALSE) null值则为FALSE
+%h或%H : 输出16进制整数 (byte/short/int/long/BigInteger)
+%n : 输出特定平台的换行符，windows下为\r\n，linux下为\n, mac下为\r
+
+
+
+
+
+
+
+
+
+
+
+
+

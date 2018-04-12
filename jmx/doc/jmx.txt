@@ -1,0 +1,26 @@
+JMX (Java Management Extensions)
+JMX是为应用程序植入管理功能的框架，是一套标准的代理和服务，事实上，用户可以在
+任何Java应用程序中使用这些代理和服务实现管理.
+MBean: Managed Bean 可管理的bean.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

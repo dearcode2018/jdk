@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hua</groupId>
+		<artifactId>jdk-entire</artifactId>
+		<version>0.0.1</version>
+	</parent>	
+	<artifactId>jmx</artifactId>
+	<packaging>jar</packaging>
+	<name>jmx</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<common.version>0.0.1</common.version>
+		<jmx.version>1.2.1</jmx.version>
+		<jmx.remote.version>1.0.1_03</jmx.remote.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hua</groupId>
+			<artifactId>common</artifactId>
+			<version>${common.version}</version>
+		</dependency>
+		
+<!-- 	<dependency>
+		<groupId>com.sun.jdmk</groupId>
+		<artifactId>jmxtools</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+ -->
+
+<!-- 		<dependency>
+			<groupId>com.sun.jmx</groupId>
+			<artifactId>jmxri</artifactId>
+			<version>${jmx.version}</version>
+		</dependency>
+	
+ 		<dependency>
+			<groupId>com.sun.jmx</groupId>
+			<artifactId>jmx_remote</artifactId>
+			<version>${jmx.remote.version}</version>
+		</dependency> -->
+		
+	</dependencies>
+
+</project>

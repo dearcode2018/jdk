@@ -1,0 +1,23 @@
+
+
+
+查看对象内存情况
+jmap -histo <PID 进程号 javaw.exe> | findstr <ObjectName 对象名称>
+
+64bit机器使用: jmap -J-d64 -heap <PID>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
