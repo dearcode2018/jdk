@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * TemplateTest.java
+ * FunctionalInterfaceTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package template.code;
+package com.hua.test.jdk;
 
 // 静态导入
 import static org.junit.Assert.assertArrayEquals;
@@ -20,6 +20,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -30,10 +37,138 @@ import com.hua.test.BaseTest;
  * 描述: 
  * 
  * @author qye.zheng
- * TemplateTest
+ * FunctionalInterfaceTest
  */
-public final class TemplateTest extends BaseTest {
+public final class FunctionalInterfaceTest extends BaseTest {
 
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testConsumer() {
+		try {
+			
+			happy(1000.0, (x) -> System.out.print("consume: " + x));
+			
+			
+		} catch (Exception e) {
+			log.error("testConsumer =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @description 
+	 * @param money
+	 * @param consumer
+	 * @author qianye.zheng
+	 */
+	public void happy(final Double money, Consumer<Double> consumer)
+	{
+		consumer.accept(money);
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testSupplier() {
+		try {
+			List<Integer> result = getNumList(10, () ->(int) (Math.random() * 1000));
+			result.stream().forEach(System.out:: println);
+		} catch (Exception e) {
+			log.error("testSupplier =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @description 
+	 * @param num
+	 * @param supplier
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public List<Integer> getNumList(Integer num, Supplier<Integer> supplier)
+	{
+		List<Integer> result = new ArrayList<>();
+		for (int i = 0; i < num; i++)
+		{
+			result.add(supplier.get());
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testFunction() {
+		try {
+			System.out.println(length("hello", (x) -> x.length()));
+			
+		} catch (Exception e) {
+			log.error("testFunction =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @description 
+	 * @param value
+	 * @param function
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public Integer length(final String value, final Function<String, Integer> function)
+	{
+		return function.apply(value);
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testPredicate() {
+		try {
+			Integer[] ages = {34, 17, 43, 23, 8};
+			Integer[] result = predicate(ages, (x) -> x > 20);
+			
+			System.out.println(result.length);
+			
+		} catch (Exception e) {
+			log.error("testPredicate =====> ", e);
+		}
+	}
+	
+	public Integer[] predicate(final Integer[] values, final Predicate<Integer> predicate)
+	{
+		List<Integer> result = new ArrayList<>();
+		for (Integer e : values)
+		{
+			if (predicate.test(e))
+			{
+				result.add(e);
+			}
+		}
+		
+		return result.toArray(new Integer[] {});
+	}
+	
 	/**
 	 * 
 	 * 描述: 

@@ -1,0 +1,55 @@
+
+
+
+hash表: HashSet HashMap 采用哈希表来存储元素，快速寻找到元素的索引位置
+一个元素根据哈希码计算出索引值，若索引值的位置没有元素，则直接存储进去；若有元素(这种情况称之为碰撞)则调用equals方法去对比，
+若元素内容相同则后者替换前者，若不同则在此位置形成一个链表来存储新元素。
+HashMap中有一个加载因子默认为0.75，即存储容量达到75%的时候就需要扩容，进一步降低元素的碰撞概率。
+
+哈希存储结构：数组-链表-红黑树:，1.8版本加上了红黑树。
+
+
+PremGen 永久区，存储方法和类加载信息
+MetaSpace 元空间，直接使用物理内存
+java8以后PremGenSize和MaxPremGenSize参数就不存在了，取而代之是MetaSpaceSize和MaxMetaSpaceSize
+
+// Lambda 表达式
+Comparator<Integer> com  = (x, y) -> Integer.compare(x, y);
+箭头操作符: ->
+左侧: 参数列表
+右侧: 功能代码(Lambda体)，接口的实现，执行结果为接口返回类型.
+函数式接口: 接口中只有一个抽象方法的接口，可以用@FunctionalInteface标注
+语法格式一: 无参数 无返回值 () -> xx
+语法格式二: 一个参数 无返回值，(x) --> xx 参数的小括号可以不写
+语法格式三: 多个参数 有返回值，Lambda体中有多条语句，用中括号包围起来，return加返回值.
+语法格式四: Lambda体中只有一条语句的时候，大括号和return才可以省略不写.
+语法格式五: 参数列表的数据类型可以不写，JVM可以根据上下文来推断.
+Lambda总结: 左右侧遇一括号省，左侧推断类型省，
+
+内置4大核心函数式接口
+1.Consumer<T> 消费型 void accept(T t);
+2.Supplier<T> 供给型 T get();
+3.Function<T, R> 函数型  R apply(T t);
+4.Predicate<T> 断言型 boolean test(T t); 
+
+方法引用
+1. 对象 :: 实例方法名
+2. 类 :: 静态方法
+3. 类 :: 实例方法名
+
+构造器引用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

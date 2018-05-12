@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * TemplateTest.java
+ * MethodReferenceTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package template.code;
+package com.hua.test.jdk;
 
 // 静态导入
 import static org.junit.Assert.assertArrayEquals;
@@ -20,20 +20,67 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.PrintStream;
+import java.util.function.BiPredicate;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.hua.entity.User;
 import com.hua.test.BaseTest;
 
 
 /**
- * 描述: 
+ * 描述: 方法引用
  * 
  * @author qye.zheng
- * TemplateTest
+ * MethodReferenceTest
  */
-public final class TemplateTest extends BaseTest {
+public final class MethodReferenceTest extends BaseTest {
 
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testMethodRef() {
+		try {
+			PrintStream ps1 = System.out;
+			Consumer<String> con1 = (x) -> ps1.println(x);
+			
+			PrintStream ps = System.out;
+			Consumer<String> con2 = ps :: println;
+			con2.accept("ps");
+			
+			User user = new User();
+			user.setNickname("haha");
+			Supplier<String> sup = () -> user.getNickname();
+			System.out.println(sup.get());
+			Supplier<String> sup2 = user :: getNickname;
+			System.out.println(sup2.get());
+			
+			Supplier<Double> sup3 = Math :: random;
+			System.out.println(sup3.get());
+			
+			/*
+			 * 对象 :: 实例方法名
+			 * 类 :: 实例方法名
+			 */
+			BiPredicate<String, String> biP = (x, y) -> x.equals(y);
+			// 2个变量，一个变量是另一个变量方法的参数 即可采用 类 :: 实例方法
+			BiPredicate<String, String> biP2 = String :: equals;
+			
+			
+		} catch (Exception e) {
+			log.error("testMethodRef =====> ", e);
+		}
+	}
+	
 	/**
 	 * 
 	 * 描述: 

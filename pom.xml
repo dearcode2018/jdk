@@ -18,7 +18,6 @@
 		<module>complier</module>		
 		<module>exception</module>		
 		<module>generic</module>		
-		<module>java</module>		
 		<module>jdk</module>		
 		<module>jdk8</module>	
 		<module>jmx</module>		
