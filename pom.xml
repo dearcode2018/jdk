@@ -20,6 +20,7 @@
 		<module>generic</module>		
 		<module>java</module>		
 		<module>jdk</module>		
+		<module>jdk8</module>	
 		<module>jmx</module>		
 		<module>jta</module>		
 		<module>jvm</module>	
