@@ -38,8 +38,38 @@ public final class User extends BaseEntity {
 	/* 上一次登录-IP地址 */
 	private String lastLoginIp;
 	
+	/* 年龄 */
+	private Integer age;
+	
 	/** 无参构造方法 */
 	public User() {}
+
+	/**
+	 * @description 构造方法
+	 * @param username
+	 * @author qianye.zheng
+	 */
+	public User(String username)
+	{
+		super();
+		this.username = username;
+	}
+
+	/**
+	 * @return the age
+	 */
+	public final Integer getAge()
+	{
+		return age;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public final void setAge(Integer age)
+	{
+		this.age = age;
+	}
 
 	/**
 	 * @return the username

@@ -23,6 +23,7 @@ import static org.junit.Assert.fail;
 import java.io.PrintStream;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.junit.Ignore;
@@ -72,12 +73,60 @@ public final class MethodReferenceTest extends BaseTest {
 			 * 类 :: 实例方法名
 			 */
 			BiPredicate<String, String> biP = (x, y) -> x.equals(y);
-			// 2个变量，一个变量是另一个变量方法的参数 即可采用 类 :: 实例方法
+			// 2个变量，第一个变量的方法是实例方法的调用者，第二个变量是实例方法的参数 即可采用 类 :: 实例方法
 			BiPredicate<String, String> biP2 = String :: equals;
-			
 			
 		} catch (Exception e) {
 			log.error("testMethodRef =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testMethodRefConstructor() {
+		try {
+
+			// 构造器引用 - 无参
+			Supplier<User> sup1 = () -> new User(); // 常规方式
+			Supplier<User> sup2 = User :: new; // 构造器引用
+
+			/*
+			 * 构造器引用 - 有参
+			 * 调用哪个构造方法，取决于函数式接口的方法的参数
+			 */
+			Function<String, User> fun1 = (x) -> new User(x); // 常规方式
+			User user1 = fun1.apply("hehe");
+			log.info("testMethodRefConstructor =====> " + user1.getUsername());
+			Function<String, User> fun2 = User :: new;
+			User user2 = fun2.apply("哈哈");
+			log.info("testMethodRefConstructor =====> " + user2.getUsername());			
+		} catch (Exception e) {
+			log.error("testMethodRefConstructor =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testMethodRefArray() {
+		try {
+			Function<Integer, String[]> fun1 = (x) -> new String[x];
+			String[] strs1 = fun1.apply(10);
+			
+			Function<Integer, String[]> fun2 = String[] :: new;
+			String[] strs2 = fun2.apply(10);
+			
+		} catch (Exception e) {
+			log.error("testMethodRefArray =====> ", e);
 		}
 	}
 	
