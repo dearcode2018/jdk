@@ -23,7 +23,8 @@
 		<module>jmx</module>		
 		<module>jta</module>		
 		<module>jvm</module>	
-		<module>literal-value</module>	
+		<module>literal-value</module>
+		<module>lombok</module>
 		<module>printf</module>		
 		<module>reflect</module>		
 		<module>sun</module>		

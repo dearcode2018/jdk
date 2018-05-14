@@ -1,0 +1,45 @@
+lombok
+一、简介
+lombok是一款Java开发插件，使得开发者可以通过其定义的一些注解来消除工程中冗长和繁琐的代码.
+它能够在编译源代码期间自动生成getter/setter/equals/hasCode/toString等这些方法. 就是一个在编译阶段辅助生成
+代码的工具，并没有如反射那样降低程序的性能.
+在编译阶段自动生成代码的插件，生成getter/setter/equals/hasCode/toString等方法
+通过注解来实现
+
+二、环境搭建
+1) 安装插件
+在eclipse等IDE中安装lombok插件
+将lombok.jar包拷贝到ECLIPSE_HOME下，在eclipse.ini配置如下:
+-Xbootclasspath/a:lombok.jar
+-javaagent:lombok.jar
+
+参考文章: https://www.cnblogs.com/lovefeng/p/6434735.html
+
+2) 加入依赖
+加入lombok依赖，以提供的方式加入.
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>${lombok.version}</version>
+    <scope>provided</scope>
+</dependency>
+
+三、实例
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
