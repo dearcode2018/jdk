@@ -374,6 +374,28 @@ public final class StreamAPITest extends BaseTest {
 	 * 
 	 */
 	@Test
+	public void testExample1() {
+		try {
+			Integer[] numbers = {1, 2, 3, 4, 5, 6};
+			Stream<Integer> stream = Arrays.stream(numbers);
+			stream.map((x) -> x * x).forEach(System.out :: println);
+			
+			Stream<Integer> stream2 = Arrays.stream(numbers);
+			Optional<Integer> count = stream2.map((x) -> 1).reduce(Integer :: sum);
+			System.out.println(count.get());
+			
+		} catch (Exception e) {
+			log.error("testExample1 =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
 	public void test() {
 		try {
 			
