@@ -1,6 +1,6 @@
 /**
  * 描述: 
- * ParallelStreamTest.java
+ * ForkJoinTest.java
  * 
  * @author qye.zheng
  *  version 1.0
@@ -20,24 +20,49 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.hua.fork.ForkJoinCalculate;
 import com.hua.test.BaseTest;
 
 
 /**
- * 描述: 并行流
+ * 描述: 
  * 
  * @author qye.zheng
- * ParallelStreamTest
+ * ForkJoinTest
  */
-public final class ParallelStreamTest extends BaseTest {
+public final class ForkJoinTest extends BaseTest {
 
 	/**
-	 * Fork/Join 框架: 在必要情况下，将一个大任务拆分(fork)成若干个小任务，拆到不可拆分为止，
-	 * 再将一个个小任务运算的结果进行join汇总.
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
 	 */
+	@Test
+	public void testForkJoin() {
+		try {
+			Instant start = Instant.now();
+			// fork join 线程池
+			ForkJoinPool pool = new ForkJoinPool();
+			ForkJoinTask<Long> task = new ForkJoinCalculate(0, 100000000L);
+			Long sum = pool.invoke(task);
+			log.info("testForkJoin =====> sum =" + sum);
+			Instant end = Instant.now();
+			
+			log.info("testForkJoin =====> " + Duration.between(start, end).toMillis());
+			
+		} catch (Exception e) {
+			log.error("testForkJoin =====> ", e);
+		}
+	}
 	
 	/**
 	 * 
@@ -46,14 +71,21 @@ public final class ParallelStreamTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testParallelStream() {
+	public void testSum() {
 		try {
-			/**
-			 * 
-			 */
+			Instant start = Instant.now();
+			long sum = 0L;
+			for (int i = 0; i<= 100000000; i++)
+			{
+				sum += i;
+			}
+			log.info("testSum =====> sum =" + sum);
+			Instant end = Instant.now();
+			
+			log.info("testSum =====> " + Duration.between(start, end).toMillis());
 			
 		} catch (Exception e) {
-			log.error("testParallelStream =====> ", e);
+			log.error("testSum =====> ", e);
 		}
 	}
 	
