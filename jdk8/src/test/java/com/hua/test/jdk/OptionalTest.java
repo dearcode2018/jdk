@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * LombokTest.java
+ * OptionalTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.lombok;
+package com.hua.test.jdk;
 
 // 静态导入
 import static org.junit.Assert.assertArrayEquals;
@@ -20,32 +20,23 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.HashSet;
+import java.util.Optional;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.hua.entity.BuilderExample;
-import com.hua.entity.Person;
-import com.hua.entity.BuilderExample.BuilderExampleBuilder;
-import com.hua.lombok.MyResource;
+import com.hua.entity.User;
 import com.hua.test.BaseTest;
-
-import lombok.Builder;
-import lombok.Cleanup;
-import lombok.NonNull;
-import lombok.val;
 
 
 /**
  * 描述: 
  * 
  * @author qye.zheng
- * LombokTest
+ * OptionalTest
  */
-public final class LombokTest extends BaseTest {
+public final class OptionalTest extends BaseTest {
 
-	
 	/**
 	 * 
 	 * 描述: 
@@ -53,12 +44,20 @@ public final class LombokTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testLombok() {
+	public void testOptional() {
 		try {
+			User user = new User();
+			user.setNickname("haha");
+			Optional<User> optional = Optional.of(user);
 			
+			System.out.println(optional.get().toString());
+			
+			// java.lang.NullPointerException
+			optional = Optional.of(null);
+			System.out.println(optional.get().toString());
 			
 		} catch (Exception e) {
-			log.error("testLombok =====> ", e);
+			log.error("testOptional =====> ", e);
 		}
 	}
 	
@@ -69,17 +68,76 @@ public final class LombokTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testVal() {
+	public void testEmpty() {
 		try {
+			Optional<User> optional = Optional.empty();
+			
+			//判断是否存在
+			System.out.println(optional.isPresent());
 			/*
-			 * val 可以将变量声明是final类型
-			 * 省略了 final 和 类型声明，通过右侧类型来推断声明类型.
+			 * java.util.NoSuchElementException: No value present
 			 */
-			// 等同于 final Set<String> setVar = new HashSet<>();
-			val setVar = new HashSet<String>();
+			System.out.println(optional.get().toString());
+		} catch (Exception e) {
+			log.error("testEmpty =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testOrElse() {
+		try {
+			Optional<User> optional = Optional.empty();
+			/*
+			 * 为空则取指定值
+			 * 符合条件则返回指定的值，对原来Optional对象没有影响
+			 */
+			User newUser = optional.orElse(new User());
+			//判断是否存在
+			System.out.println(optional.isPresent());
+			/*
+			 * java.util.NoSuchElementException: No value present
+			 */
+			System.out.println(optional.get().toString());
+			
+			System.out.println(newUser.toString());
 			
 		} catch (Exception e) {
-			log.error("testVal =====> ", e);
+			log.error("testOrElse =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testOfNullable() {
+		try {
+			Optional<User> optional = Optional.ofNullable(null);
+			/*
+			 * 为空则取指定值
+			 * 符合条件则返回指定的值，对原来Optional对象没有影响
+			 */
+			User newUser = optional.orElse(new User());
+			//判断是否存在
+			System.out.println(optional.isPresent());
+			/*
+			 * java.util.NoSuchElementException: No value present
+			 */
+			System.out.println(optional.get().toString());
+			
+			System.out.println(newUser.toString());
+			
+		} catch (Exception e) {
+			log.error("testOfNullable =====> ", e);
 		}
 	}
 	
@@ -91,78 +149,14 @@ public final class LombokTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testNonNull() {
+	public void testOrElseGet() {
 		try {
-			/*
-			 * @NonNull 注解
-			 * 可以为方法的参数提供非空检查
-			 */
-			printName(null);
-			printName("");
-			printName("zhangsan");
-		} catch (Exception e) {
-			log.error("testNonNull =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * @description 
-	 * @param name
-	 * @author qianye.zheng
-	 */
-	public final void printName(@NonNull String name)
-	{
-		/*
-		 * 只判断 null的情况，对String没有判断空字符串的情况
-		 * @NonNull String name 等同于 final String name 
-		 * if (null != name)
-		 * { 
-		 * } else
-		 * { 
-		 *  throw new NullPointerException("null");
-		 * }
-		 * 
-		 */
-		log.info("getName =====> name = " + name);
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testCleanup() {
-		try {
-			/*
-			 * @Cleanup 注解
-			 * 自动释放资源, 自动调用对象的close()方法，也可以指定对象调用关闭资源的方法，默认是close
-			 * 自定义一个资源
-			 * close的方法没有参数
-			 */
-			/*
-			 * 相当于
-			 * try
-			 * {
-			 * MyResource myResource = new MyResource();
-			 * }
-			 *finally
-			 *{
-			 * if (null != myResource)
-			 * {
-			 *   myResource.close();
-			 * }
-			 * }
-			 */
-			@Cleanup MyResource myResource = new MyResource();
-			
-			// 自定义关闭的方法
-			@Cleanup("close2") MyResource myResource2 = new MyResource();
+			Optional<User> optional = Optional.ofNullable(null);
+			User user = optional.orElseGet(() -> new User());
+			System.out.println(user.toString());
 			
 		} catch (Exception e) {
-			log.error("testCleanup =====> ", e);
+			log.error("testOrElseGet =====> ", e);
 		}
 	}
 	
@@ -173,22 +167,16 @@ public final class LombokTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testClassAnnotation() {
+	public void testMap() {
 		try {
-			/*
-			 * 类注解
-			 * @Getter/@Setter/@ToString
-			 */
-			Person p = new Person();
-			p.setNickname("xx");
-			p.setAge(12);
-			
-			System.out.println(p.toString());
-			
-			Person p2 = new Person();
+			User user = new User();
+			user.setNickname("haha");
+			Optional<User> optional = Optional.of(user); 
+			Optional<String> nameOptional = optional.map((x) -> x.getNickname());
+			log.info("testMap =====> " + nameOptional.get());
 			
 		} catch (Exception e) {
-			log.error("testClassAnnotation =====> ", e);
+			log.error("testMap =====> ", e);
 		}
 	}
 	
@@ -199,33 +187,17 @@ public final class LombokTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testBuilder() {
+	public void testFlatMap() {
 		try {
-			/*
-			 * @Builder 注解 辅助生成了 构建对象的代码
-			 */
-			BuilderExample example = BuilderExample.builder().build();
-		} catch (Exception e) {
-			log.error("testBuilder", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testSynchronized() {
-		try {
-			/*
-			 * @Synchronized 注解 相当于 synchronized关键字
-			 * 使用注解可以隐藏同步锁
-			 */
+			User user = new User();
+			user.setNickname("haha");
+			Optional<User> optional = Optional.of(user); 
+			// flagMap 需要再返回 Optional
+			Optional<String> nameOptional = optional.flatMap((x) -> Optional.of(x.getNickname()));
+			log.info("testFlatMap =====> " + nameOptional.get());
 			
 		} catch (Exception e) {
-			log.error("testSynchronized =====> ", e);
+			log.error("testFlatMap =====> ", e);
 		}
 	}
 	

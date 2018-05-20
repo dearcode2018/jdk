@@ -42,6 +42,8 @@ import lombok.ToString;
 public class Person extends BaseEntity
 {
 	
+	
+	
 	/*
 	 * @Data 注解就是其他注解的集合，
 	 */
