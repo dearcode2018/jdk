@@ -13,6 +13,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<jdk_parent.version>0.0.1</jdk_parent.version>
+		<cglib.version>3.2.4</cglib.version>
+		<asm.version>6.0_ALPHA</asm.version>		
 	</properties>
 
 	<dependencies>
@@ -21,6 +23,12 @@
 			<artifactId>jdk</artifactId>
 			<version>${jdk_parent.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>		
 		
 	</dependencies>
 

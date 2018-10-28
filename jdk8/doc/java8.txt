@@ -11,7 +11,7 @@ HashMap中有一个加载因子默认为0.75，即存储容量达到75%的时候
 
 PremGen 永久区，存储方法和类加载信息
 MetaSpace 元空间，直接使用物理内存
-java8以后PremGenSize和MaxPremGenSize参数就不存在了，取而代之是MetaSpaceSize和MaxMetaSpaceSize
+java8以后PermGenSize和MaxPermGenSize参数就不存在了，取而代之是MetaspaceSize和MaxMetaspaceSize
 
 // Lambda 表达式
 Comparator<Integer> com  = (x, y) -> Integer.compare(x, y);
