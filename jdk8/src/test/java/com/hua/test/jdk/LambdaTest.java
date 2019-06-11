@@ -1,6 +1,6 @@
 /**
  * 描述: 
- * OptionalTest.java
+ * LambdaTest.java
  * 
  * @author qye.zheng
  *  version 1.0
@@ -18,15 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.DynamicTest.dynamicTest;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
-
-
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +30,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.hua.entity.User;
+import com.hua.lambda.IConsumer;
+import com.hua.lambda.IFunction;
+import com.hua.lambda.NoParamNoReturn;
 import com.hua.test.BaseTest;
 
 
@@ -43,12 +40,12 @@ import com.hua.test.BaseTest;
  * 描述: 
  * 
  * @author qye.zheng
- * OptionalTest
+ * LambdaTest
  */
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
-public final class OptionalTest extends BaseTest {
+public final class LambdaTest extends BaseTest {
 
 	
 	/**
@@ -57,165 +54,126 @@ public final class OptionalTest extends BaseTest {
 	 * @author qye.zheng
 	 * 
 	 */
+	//@DisplayName("test")
 	@Test
-	public void testOptional() {
+	public void testStyle01() {
 		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user);
+			// 无参，无返回
+			NoParamNoReturn npnr = () -> {
+				// do something ...
+				System.out.println("LambdaTest.testStyle01()");
+			};
 			
-			System.out.println(optional.get().toString());
-			
-			// java.lang.NullPointerException
-			optional = Optional.of(null);
-			System.out.println(optional.get().toString());
+			npnr.doSomething();
 			
 		} catch (Exception e) {
-			log.error("testOptional =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testEmpty() {
-		try {
-			Optional<User> optional = Optional.empty();
-			
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-		} catch (Exception e) {
-			log.error("testEmpty =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOrElse() {
-		try {
-			Optional<User> optional = Optional.empty();
-			/*
-			 * 为空则取指定值
-			 * 符合条件则返回指定的值，对原来Optional对象没有影响
-			 */
-			User newUser = optional.orElse(new User());
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-			
-			System.out.println(newUser.toString());
-			
-		} catch (Exception e) {
-			log.error("testOrElse =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOfNullable() {
-		try {
-			Optional<User> optional = Optional.ofNullable(null);
-			/*
-			 * 为空则取指定值
-			 * 符合条件则返回指定的值，对原来Optional对象没有影响
-			 */
-			User newUser = optional.orElse(new User());
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-			
-			System.out.println(newUser.toString());
-			
-		} catch (Exception e) {
-			log.error("testOfNullable =====> ", e);
-		}
-	}
-	
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOrElseGet() {
-		try {
-			Optional<User> optional = Optional.ofNullable(null);
-			//User user = optional.orElseGet(() -> new User());
-			User user = optional.orElseGet(User::new);
-			System.out.println(user.toString());
-			
-		} catch (Exception e) {
-			log.error("testOrElseGet =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testMap() {
-		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user); 
-			//Optional<String> nameOptional = optional.map((x) -> x.getNickname());
-			Optional<String> nameOptional = optional.map(User :: getNickname);
-			log.info("testMap =====> " + nameOptional.get());
-			
-		} catch (Exception e) {
-			log.error("testMap =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testFlatMap() {
-		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user); 
-			// flagMap 需要再返回 Optional
-			Optional<String> nameOptional = optional.flatMap((x) -> Optional.of(x.getNickname()));
-			log.info("testFlatMap =====> " + nameOptional.get());
-			
-		} catch (Exception e) {
-			log.error("testFlatMap =====> ", e);
+			log.error("testStyle01 =====> ", e);
 		}
 	}	
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testStyle02() {
+		try {
+			// 一个参数 无返回值
+			IConsumer npnr = (value) -> {
+				// do something ...
+				System.out.println("value = " + value);
+			};
+			
+			npnr.consume("消费型Function");
+			
+		} catch (Exception e) {
+			log.error("testStyle02 =====> ", e);
+		}
+	}	
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testStyle03() {
+		try {
+			// 多个参数 有返回值，Lambda体中有多条语句，用中括号包围起来，return加返回值.
+			// 一行，可以忽略中括号和return关键字
+			IFunction npnr = (x, y, z) ->  x + y + z;
+				//return x + y + z;
+			String value = npnr.concat("a", "b", "c");
+			System.out.println(value);
+
+			IFunction npnr2 = (x, y, z) -> {
+				return  x + "||" +  y + "||" + z;
+			};
+		String value2 = npnr2.concat("a", "b", "c");
+		System.out.println(value2);			
+			
+			
+		} catch (Exception e) {
+			log.error("testStyle03 =====> ", e);
+		}
+	}	
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testStyle04() {
+		try {
+			// Lambda体中只有一条语句的时候，大括号和return才可以省略不写.
+			// 一行，可以忽略中括号和return关键字
+			IFunction npnr = (x, y, z) ->  x + y + z;
+				//return x + y + z;
+			String value = npnr.concat("a", "b", "c");
+			System.out.println(value);
+			
+		} catch (Exception e) {
+			log.error("testStyle04 =====> ", e);
+		}
+	}	
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	//@DisplayName("test")
+	@Test
+	public void testStyle05() {
+		try {
+		// 参数列表的数据类型可以不写，JVM可以根据上下文来推断.
+		// 声明类型
+		IFunction npnr = (String x, String y, String z) -> {
+			return  x + "||" +  y + "||" + z;
+		};
+		String value = npnr.concat("a", "b", "c");
+		System.out.println(value);					
+		
+		// 不写类型
+		IFunction npnr2 = (x, y, z) -> {
+			return  x + "||" +  y + "||" + z;
+		};
+		String value2 = npnr2.concat("a", "b", "c");
+		System.out.println(value2);		
+			
+		} catch (Exception e) {
+			log.error("testStyle05 =====> ", e);
+		}
+	}		
 	
 	/**
 	 * 

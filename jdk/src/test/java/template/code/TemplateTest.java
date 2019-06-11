@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * OptionalTest.java
+ * TemplateTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.jdk;
+package template.code;
 
 //静态导入
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -19,9 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
@@ -35,7 +32,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.hua.entity.User;
 import com.hua.test.BaseTest;
 
 
@@ -43,179 +39,15 @@ import com.hua.test.BaseTest;
  * 描述: 
  * 
  * @author qye.zheng
- * OptionalTest
+ * TemplateTest
  */
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
-public final class OptionalTest extends BaseTest {
+public final class TemplateTest extends BaseTest {
 
 	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOptional() {
-		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user);
-			
-			System.out.println(optional.get().toString());
-			
-			// java.lang.NullPointerException
-			optional = Optional.of(null);
-			System.out.println(optional.get().toString());
-			
-		} catch (Exception e) {
-			log.error("testOptional =====> ", e);
-		}
-	}
 	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testEmpty() {
-		try {
-			Optional<User> optional = Optional.empty();
-			
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-		} catch (Exception e) {
-			log.error("testEmpty =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOrElse() {
-		try {
-			Optional<User> optional = Optional.empty();
-			/*
-			 * 为空则取指定值
-			 * 符合条件则返回指定的值，对原来Optional对象没有影响
-			 */
-			User newUser = optional.orElse(new User());
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-			
-			System.out.println(newUser.toString());
-			
-		} catch (Exception e) {
-			log.error("testOrElse =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOfNullable() {
-		try {
-			Optional<User> optional = Optional.ofNullable(null);
-			/*
-			 * 为空则取指定值
-			 * 符合条件则返回指定的值，对原来Optional对象没有影响
-			 */
-			User newUser = optional.orElse(new User());
-			//判断是否存在
-			System.out.println(optional.isPresent());
-			/*
-			 * java.util.NoSuchElementException: No value present
-			 */
-			System.out.println(optional.get().toString());
-			
-			System.out.println(newUser.toString());
-			
-		} catch (Exception e) {
-			log.error("testOfNullable =====> ", e);
-		}
-	}
-	
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testOrElseGet() {
-		try {
-			Optional<User> optional = Optional.ofNullable(null);
-			//User user = optional.orElseGet(() -> new User());
-			User user = optional.orElseGet(User::new);
-			System.out.println(user.toString());
-			
-		} catch (Exception e) {
-			log.error("testOrElseGet =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testMap() {
-		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user); 
-			//Optional<String> nameOptional = optional.map((x) -> x.getNickname());
-			Optional<String> nameOptional = optional.map(User :: getNickname);
-			log.info("testMap =====> " + nameOptional.get());
-			
-		} catch (Exception e) {
-			log.error("testMap =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testFlatMap() {
-		try {
-			User user = new User();
-			user.setNickname("haha");
-			Optional<User> optional = Optional.of(user); 
-			// flagMap 需要再返回 Optional
-			Optional<String> nameOptional = optional.flatMap((x) -> Optional.of(x.getNickname()));
-			log.info("testFlatMap =====> " + nameOptional.get());
-			
-		} catch (Exception e) {
-			log.error("testFlatMap =====> ", e);
-		}
-	}	
 	
 	/**
 	 * 
