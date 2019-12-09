@@ -81,7 +81,7 @@ public final class FunctionalInterfaceTest extends BaseTest {
 	@Test
 	public void testSupplier() {
 		try {
-			List<Integer> result = getNumList(10, () ->(int) (Math.random() * 1000));
+			List<Integer> result = getNumList(10, () ->{ return (int) (Math.random() * 1000);});
 			result.stream().forEach(System.out:: println);
 		} catch (Exception e) {
 			log.error("testSupplier =====> ", e);
