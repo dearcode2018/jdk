@@ -27,6 +27,7 @@
 		<module>lombok</module>
 		<module>printf</module>		
 		<module>reflect</module>		
+		<module>service-provider</module>
 		<module>sun</module>		
 		<module>text</module>		
 		<module>write-code</module>		

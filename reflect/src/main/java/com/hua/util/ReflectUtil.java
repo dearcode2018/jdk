@@ -8,12 +8,10 @@ package com.hua.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.hua.annotation.FieldCheck;
-import com.hua.util.DateTimeUtil;
-import com.hua.util.EmptyUtil;
-import com.hua.util.StringUtil;
 
 /**
  * ReflectUtil
@@ -22,6 +20,9 @@ import com.hua.util.StringUtil;
  */
 public final class ReflectUtil
 {
+	
+	protected static final Logger log = LogManager.getLogger(ReflectUtil.class.getName());
+	
 
 	/**
 	 * 构造方法
@@ -41,7 +42,7 @@ public final class ReflectUtil
 	 * @param object
 	 * @param log
 	 */
-	public static void alertSearch(final String methodName, final Object object, final Log log)
+	public static void alertSearch(final String methodName, final Object object)
 	{
 		final Class<?> clazz = object.getClass();
 		// 获取所有声明的属性
@@ -109,7 +110,7 @@ public final class ReflectUtil
 	 * @return true - 验证通过，false - 存在为空数据，验证不通过
 	 * 字符串为空单独验证
 	 */
-	public static boolean notEmptyValidate(final Object target, final Log log)
+	public static boolean notEmptyValidate(final Object target)
 	{
 		boolean flag = false;
 		final Class<?> clazz = target.getClass();

@@ -6,17 +6,22 @@
  */
 package com.hua.entity;
 
- /**
+import lombok.Data;
+
+/**
  * @type Trader
  * @description 交易员
  * @author qianye.zheng
  */
+@Data
 public class Trader
 {
 	
 	private String name;
 	
 	private String city;
+	
+	private String remark;
 
 	/**
 	 * @description 构造方法
@@ -30,38 +35,13 @@ public class Trader
 		this.name = name;
 		this.city = city;
 	}
-
-	/**
-	 * @return the name
-	 */
-	public final String getName()
+	
+	public String getRemark()
 	{
-		return name;
+		
+		return name + " | " + city;
 	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public final void setName(String name)
-	{
-		this.name = name;
-	}
-
-	/**
-	 * @return the city
-	 */
-	public final String getCity()
-	{
-		return city;
-	}
-
-	/**
-	 * @param city the city to set
-	 */
-	public final void setCity(String city)
-	{
-		this.city = city;
-	}
+	
 	/**
 	 * @description 
 	 * @return

@@ -6,11 +6,14 @@
  */
 package com.hua.entity;
 
- /**
+import lombok.Data;
+
+/**
  * @type Transaction
  * @description 
  * @author qianye.zheng
  */
+@Data
 public class Transaction
 {
 
@@ -32,54 +35,6 @@ public class Transaction
 		super();
 		this.trader = trader;
 		this.year = year;
-		this.value = value;
-	}
-
-	/**
-	 * @return the trader
-	 */
-	public final Trader getTrader()
-	{
-		return trader;
-	}
-
-	/**
-	 * @param trader the trader to set
-	 */
-	public final void setTrader(Trader trader)
-	{
-		this.trader = trader;
-	}
-
-	/**
-	 * @return the year
-	 */
-	public final Integer getYear()
-	{
-		return year;
-	}
-
-	/**
-	 * @param year the year to set
-	 */
-	public final void setYear(Integer year)
-	{
-		this.year = year;
-	}
-
-	/**
-	 * @return the value
-	 */
-	public final Integer getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public final void setValue(Integer value)
-	{
 		this.value = value;
 	}
 	

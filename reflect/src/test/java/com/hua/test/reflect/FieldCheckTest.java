@@ -52,7 +52,7 @@ public final class FieldCheckTest extends BaseTest {
 			
 			productUnqualified.setAddress("zang");
 			
-			ReflectUtil.notEmptyValidate(productUnqualified, log);
+			//ReflectUtil.notEmptyValidate(productUnqualified, log);
 			
 			
 		} catch (Exception e) {

@@ -1,11 +1,11 @@
 /**
  * 描述: 
- * ReflectFieldValueTest.java
+ * TemplateTest.java
  * 
  * @author qye.zheng
  *  version 1.0
  */
-package com.hua.test.reflect;
+package template.code;
 
 // 静态导入
 import static org.junit.Assert.assertArrayEquals;
@@ -20,31 +20,20 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.lang.reflect.Field;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.hua.bean.reflect.SearchBean;
 import com.hua.test.BaseTest;
-import com.hua.util.DateTimeUtil;
-import com.hua.util.ReflectUtil;
 
 
 /**
  * 描述: 
  * 
  * @author qye.zheng
- * ReflectFieldValueTest
+ * TemplateTest
  */
-public final class ReflectFieldValueTest extends BaseTest {
+public final class TemplateTest extends BaseTest {
 
-	private Class<?> clazz = SearchBean.class;
-	
-	private Field[] fields;
-	
-	private Field field;
-	
 	/**
 	 * 
 	 * 描述: 
@@ -52,68 +41,12 @@ public final class ReflectFieldValueTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testReflectField() {
+	public void test() {
 		try {
-			SearchBean searchBean = new SearchBean();
-			searchBean.setBt(new Byte((byte) 127));
-			searchBean.setFl(102.5F);
-			searchBean.setFlag(true);
-			searchBean.setCh('a');
-			searchBean.setDate(DateTimeUtil.getDate());
-			searchBean.setDb(11.90);
-			//searchBean.setI(23);
-			searchBean.setId("216545ac");
-			searchBean.setLon(22000L);
-			searchBean.setSh((short) 20);
-			searchBean.setIn(9876);
-			searchBean.setDateTime(DateTimeUtil.getDateTime());
 			
-			// 
-			fields = clazz.getDeclaredFields();
-			for (int i = 0; i < fields.length; i++)
-			{
-				field = fields[i];
-				// 给指定的属性设置值
-				// 设置为可以访问(若不设置，则访问将抛异常)
-				/*
-				 java.lang.IllegalAccessException: Class com.hua.test.reflect.ReflectTest can not access a 
-				 member of class com.hua.entity.User with modifiers "private"
-				 */
-				field.setAccessible(true);
-				System.out.println(field.getName() + ": " + field.get(searchBean));
-			}
 			
 		} catch (Exception e) {
-			log.error("testReflectField =====> ", e);
-		}
-	}
-	
-	/**
-	 * 
-	 * 描述: 
-	 * @author qye.zheng
-	 * 
-	 */
-	@Test
-	public void testAlertSearch() {
-		try {
-			SearchBean searchBean = new SearchBean();
-			searchBean.setBt(new Byte((byte) 127));
-			searchBean.setFl(102.5F);
-			//searchBean.setFlag(true);
-			searchBean.setCh('a');
-			searchBean.setDate(DateTimeUtil.getDate());
-			searchBean.setDb(11.90);
-			//searchBean.setI(23);
-			//searchBean.setId("216545ac");
-			searchBean.setLon(22000L);
-			searchBean.setSh((short) 20);
-			searchBean.setIn(9876);
-			//searchBean.setDateTime(DateTimeUtil.getDateTime());
-			//ReflectUtil.alertSearch("testAlertSearch", searchBean, log);
-			
-		} catch (Exception e) {
-			log.error("testAlertSearch =====> ", e);
+			log.error("test =====> ", e);
 		}
 	}
 	
