@@ -23,6 +23,7 @@ import static org.junit.Assert.fail;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.hua.constant.sys.UserType;
 import com.hua.test.BaseTest;
 
 
@@ -75,8 +76,14 @@ public final class JdkTest extends BaseTest {
 	@Test
 	public void testTemp() {
 		try {
-			
-			
+			int[] arr = null;
+			int a = arr.length;
+			System.out.println(Math.round(11.5) + "," + Math.round(-11.5));
+			// short s1 = 1; s1 += 1;
+			//short s1 = 1; s1 = (short) (s1 + Short.valueOf("1").shortValue());
+			// 错误
+			//short s1 = 1; s1 = s1 + Short.valueOf("1").shortValue();
+			//short s1 = 1; s1 = s1 + 2;
 		} catch (Exception e) {
 			log.error("testTemp=====> ", e);
 		}
@@ -123,10 +130,61 @@ public final class JdkTest extends BaseTest {
 	@Test
 	public void testBase() {
 		try {
+			// switch支持 byte/short/char/int/enum/String
+			//byte b = 1;
+			//long b = 1;
+			//int b = 1;
+			//b += 1;
+			//short b =1;
+			//char b = 'd';
+			//String b = null;
+			//Object b = null;
+			//double b = 1.0;
+			//float b = 1.0F;
+			UserType b = null;
+			char c = '海';
+			switch (b) {
 			
+			}
 			
 		} catch (Exception e) {
 			log.error("testBase =====> ", e);
+		}
+	}
+	
+	abstract class A {
+		abstract Object  a1();
+		native void  a2();
+		native synchronized void  a3();
+		// Default methods are allowed only in 
+		//default void b() {
+		//}
+		
+	}
+	
+	
+	abstract class B extends A {
+		
+		//final int i;
+		
+		{
+			//i = 10;
+		}
+		
+		public B () {
+			this(1);
+			//i = 11;
+			int i = 10;
+		}
+		
+		public B (int i) {
+			
+		}
+		
+		@Override
+		String a1()
+		{
+			return "a";
 		}
 	}
 	

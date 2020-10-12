@@ -22,4 +22,18 @@ public interface NoParamNoReturn
 	 * @author qianye.zheng
 	 */
 	void doSomething();
+	
+	
+	public class A {
+		
+		public void f2() {
+			f(() -> System.out.println("xx"));
+		}
+		
+		
+		public void f(NoParamNoReturn param)
+		{
+			
+		};
+	}
 }

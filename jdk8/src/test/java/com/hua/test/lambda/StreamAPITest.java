@@ -57,7 +57,7 @@ import com.hua.view.UserVO;
 //@DisplayName("测试类名称")
 //@Tag("测试类标签")
 //@Tags({@Tag("测试类标签1"), @Tag("测试类标签2")})
-public final class StreamAPITest extends BaseTest {
+public final  class StreamAPITest extends BaseTest {
 
 	private List<UserVO> vos;
 	
@@ -71,7 +71,6 @@ public final class StreamAPITest extends BaseTest {
 	@Test
 	public void test() {
 		try {
-			
 			
 		} catch (Exception e) {
 			log.error("test =====> ", e);
@@ -274,6 +273,8 @@ public final class StreamAPITest extends BaseTest {
 	public void testFlatMap() {
 		try {
 			/**
+			 * flat: 使扁平化，将一个流拉平了
+			 * 原先流中某个字段存在stream结构的话，可以通过这个方法拉平.
 			 * 将列表中的列表 全部连接起来，输出一个完整列表
 			 */
 			Stream<String> values = vos.stream().flatMap(x -> x.getLastLoginIps().stream());
@@ -426,11 +427,16 @@ public final class StreamAPITest extends BaseTest {
 	@Test
 	public void testPeek() {
 		try {
-			// TODO 用法尚未明确
+			/*
+			 * peek: 顾名思义，窥视、偷看，在某个stream之间插入干预
+			 * peek设计为调试用的方法，必须进行一次处理，然后生成新的流
+			 */
 			//vos.stream().peek(System.out :: println);
-			vos.stream().filter(UserVO :: getValid).peek(e -> System.out.println(e));
-			
-			
+			//vos.stream().filter(UserVO :: getValid).peek(e -> System.out.println(e));
+			// 正常的: 
+			Stream.of("one", "two", "three", "four").filter(x -> x.length() > 3).map(String :: toUpperCase).forEach(System.out :: println);
+			// 调试的: 
+			Stream.of("one", "two", "three", "four").filter(x -> x.length() > 3).peek(System.out :: println).map(String :: toUpperCase).forEach(System.out :: println);
 		} catch (Exception e) {
 			log.error("testPeek =====> ", e);
 		}
@@ -563,6 +569,7 @@ public final class StreamAPITest extends BaseTest {
 	@Test
 	public void testReduce1() {
 		try {
+			// reduce: 归纳、汇总
 			vos.stream().reduce((x, y) -> {
 				if (x.getAge() > y.getAge())
 				{

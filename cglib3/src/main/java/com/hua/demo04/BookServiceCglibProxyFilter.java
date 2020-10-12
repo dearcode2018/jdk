@@ -25,6 +25,7 @@ public class BookServiceCglibProxyFilter implements CallbackFilter
 	 * 代表执行哪个代理，NoOp.INSTANCE 表示不执行代理，放行的方法需要和此对应
 	 * @author qianye.zheng
 	 */
+	@Override
 	public int accept(Method method)
 	{
 		// 过滤掉某些方法

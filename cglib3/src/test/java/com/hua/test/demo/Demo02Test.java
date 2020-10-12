@@ -82,7 +82,7 @@ public final class Demo02Test extends BaseTest {
 			cglibProxy = new BookServiceCglibProxy("admin");
 			service = BookServiceFactory.getInstance(cglibProxy);
 			// 方法调用
-			service.create();
+			//service.create();
 			service.delete();
 			service.update();
 			service.query();

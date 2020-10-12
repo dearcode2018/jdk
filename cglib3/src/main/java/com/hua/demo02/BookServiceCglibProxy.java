@@ -59,6 +59,7 @@ public class BookServiceCglibProxy implements MethodInterceptor
 	 * @throws Throwable
 	 * @author qianye.zheng
 	 */
+	@Override
 	public Object intercept(final Object proxyedObj, final Method proxyedMethod, final Object[] args,
 			final MethodProxy proxy) throws Throwable
 	{

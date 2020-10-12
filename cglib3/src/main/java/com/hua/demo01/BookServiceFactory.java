@@ -49,15 +49,8 @@ public class BookServiceFactory
 	 */
 	public static final BookService getInstance(final BookServiceCglibProxy cglibProxy)
 	{
-		final Enhancer enhancer = new Enhancer();
-		// 设置被代理对象
-		enhancer.setSuperclass(BookService.class);
-		// 设置回调(代理)
-		enhancer.setCallback(cglibProxy);
-		// 生成代理实例
-		final BookService service = (BookService) enhancer.create();
-		
-		return service;
+		// 返回生成代理实例
+		return (BookService) cglibProxy.getPoxyObject(BookService.class);
 	}
 	
 	/**

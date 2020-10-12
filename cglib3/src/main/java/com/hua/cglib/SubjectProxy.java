@@ -43,14 +43,13 @@ public class SubjectProxy implements MethodInterceptor {
 	{
 		// 增强对象
 		Enhancer enhancer = new Enhancer();
-		// 设置代理兑现的父类 为 委托类
+		// 设置代理类的父类 为 委托类
 		enhancer.setSuperclass(delegate.getClass());
 		// 回调方法
 		enhancer.setCallback(this);
-		// 创建代理对象
-		Object proxy = enhancer.create();
 		
-		return proxy;
+		// 返回创建的代理对象
+		return  enhancer.create();
 	}
 	
 	/**
@@ -63,6 +62,7 @@ public class SubjectProxy implements MethodInterceptor {
 	 * @throws Throwable
 	 * @author qye.zheng
 	 */
+	@Override
 	public Object intercept(Object obj, Method method, Object[] args,
 			MethodProxy proxy) throws Throwable {
 		System.out.println("SubjectProxy.intercept 调用前");
