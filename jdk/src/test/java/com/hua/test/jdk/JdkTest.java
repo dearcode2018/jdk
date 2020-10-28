@@ -75,7 +75,9 @@ public final class JdkTest extends BaseTest {
 	@Test
 	public void testTemp() {
 		try {
-			
+			double d = 1.0;
+			float f = 1.0F;
+			long l = 1;
 			
 		} catch (Exception e) {
 			log.error("testTemp=====> ", e);
