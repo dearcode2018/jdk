@@ -1,43 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.hua</groupId>
-  <artifactId>jdk-entire</artifactId>
-  <version>0.0.1</version>
-  <packaging>pom</packaging>
-  <name>jdk-entire</name>
-  <description>jdk Maven Entire Project</description>
-  
-  	<!-- 模块-子项目 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hua</groupId>
+	<artifactId>jdk-entire</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>jdk-entire</name>
+	<description>jdk Maven Entire Project</description>
+
+	<!-- 模块-子项目 -->
 	<modules>
 		<!-- 模板 -->
-		<module>jdk-template</module>		
-		<module>aop</module>		
-		<module>aspectj</module>		
-		<module>catch</module>		
-		<module>cglib3</module>		
-		<module>complier</module>		
-		<module>exception</module>		
-		<module>generic</module>		
-		<module>jdk</module>		
-		<module>jdk8</module>	
-		<module>jmx</module>		
-		<module>jta</module>		
-		<module>jvm</module>	
-		<module>literal-value</module>
+		<module>jdk-template</module>
+		<module>aspectj</module>
+		<module>cglib</module>
+		<module>exception</module>
+		<module>generic</module>
+		<module>jdk-core</module>
+		<module>jdk8</module>
+		<module>jmx</module>
+		<module>jvm</module>
 		<module>lombok</module>
-		<module>printf</module>		
-		<module>reflect</module>		
+		<module>reflect</module>
 		<module>service-provider</module>
-		<module>sun</module>		
-		<module>text</module>		
-		<module>write-code</module>		
 	</modules>
- 
+
 	<!-- 公共属性 -->
 	<properties>
 		<jdk.version.version>1.8</jdk.version.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.version>0.0.1</maven.version>
+		<maven.version>1.0.0</maven.version>
 		<maven.plugin.compiler.version>3.3</maven.plugin.compiler.version>
 		<maven.plugin.source.version>2.4</maven.plugin.source.version>
 		<maven.plugin.surefire.version>2.18.1</maven.plugin.surefire.version>
@@ -45,11 +38,51 @@
 		<maven.plugin.resources.version>2.7</maven.plugin.resources.version>
 		<maven.plugin.dependency.version>2.10</maven.plugin.dependency.version>
 		<maven.plugin.war.version>3.0</maven.plugin.war.version>
-		<cglib.version>	3.3.0</cglib.version>		
-	</properties>  
-  
-  
- 	<!-- 公共构建 -->
+		<cglib.version> 3.3.0</cglib.version>
+		<common.version>1.0.0</common.version>
+		<asm.version>9.0</asm.version>
+		<jdk-core.version>1.0.0</jdk-core.version>
+		<jmx.version>1.2.1</jmx.version>
+		<jmx.remote.version>1.0.1_03</jmx.remote.version>	
+		<lombok.version>1.18.6</lombok.version>			
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>jdk-core</artifactId>
+				<version>${jdk-core.version}</version>
+			</dependency>		
+		
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>${cglib.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>common</artifactId>
+				<version>${common.version}</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.ow2.asm</groupId>
+			    <artifactId>asm</artifactId>
+			    <version>${asm.version}</version>
+			</dependency>	
+			
+			<dependency>
+			    <groupId>org.projectlombok</groupId>
+			    <artifactId>lombok</artifactId>
+			    <version>${lombok.version}</version>
+			    <scope>provided</scope>
+			</dependency>					
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- 公共构建 -->
 	<build>
 		<plugins>
 
@@ -139,25 +172,23 @@
 				</configuration>
 			</plugin>
 
-			<!-- 解决 web项目pom.xml报错 -->
+			<!-- 要将源码放上去，需要加入这个插件 -->
 			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
-					<version>${maven.plugin.war.version}</version>
+					<attach>true</attach>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
 	</build>
-	
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>cglib</groupId>
-				<artifactId>cglib-nodep</artifactId>
-				<version>${cglib.version}</version>
-			</dependency>			
-		</dependencies>
-	</dependencyManagement>
-	
+
 </project>
